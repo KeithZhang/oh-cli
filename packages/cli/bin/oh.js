@@ -6,11 +6,13 @@ const program = require('commander');
 program.version('0.0.1').usage('<command> [options]');
 
 program
-  .command('build <app-name>')
+  .command('build')
   .description('build all files of the given app by oh-cli')
   .action((name, cmd) => {
     console.log('name..', name);
     console.log('cmd..', cmd);
+
+    require('../lib/build')();
   });
 
 program
