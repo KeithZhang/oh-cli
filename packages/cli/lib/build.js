@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const inquirer = require('inquirer');
 
 module.exports = () => {
@@ -7,7 +8,7 @@ module.exports = () => {
         type: 'list',
         name: 'platform',
         message: '选择你想要构建的平台？',
-        choices: ['d2p-pc', 'd2p-wx', 'd2p-app']
+        choices: ['pc', 'wx', 'app']
       },
       {
         type: 'list',
@@ -33,6 +34,17 @@ module.exports = () => {
       }
     ])
     .then(answers => {
-      console.log('结果..', answers);
+      console.log(chalk.green('结果..', JSON.stringify(answers)));
+      const { platform } = answers;
+      switch (platform) {
+        case 'wx':
+          require('./wx')(answers);
+          break;
+        case 'pc':
+          require('./wx')(answers);
+          break;
+        default:
+          console.log(chalk.yellow('nothing matched!'));
+      }
     });
 };
